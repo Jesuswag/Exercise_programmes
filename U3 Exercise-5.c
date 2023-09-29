@@ -8,5 +8,4 @@ void main(){
         horas -= 12;
     }
     printf("La hora en formato 12 h seria: %d:%d",horas,minutos);
-
 }
