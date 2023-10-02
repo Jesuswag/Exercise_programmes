@@ -1,16 +1,16 @@
-//
-// Created by Jesus on 25/09/2023.
-//
 #include <stdio.h>
 int main(){
     float a,b,c,d,e,f;
     float x,y;
-
-    puts("Introduce los tres primeros coeficientes separados por coma:");
-    scanf("%f,%f,%f",&a,&b,&c);
-    puts("Ahora los tres ultimos:");
-    scanf("%f,%f,%f",&d,&e,&f);
-
+    do{
+        printf("Introduce los tres primeros coeficientes separados por coma:");
+        scanf("%f,%f,%f",&a,&b,&c);
+        printf("Ahora los tres ultimos:");
+        scanf("%f,%f,%f",&d,&e,&f);
+        if (!(b*d-a*e)) printf("No puedes dividir entre 0, vuelva a introducir los numeros:\n");
+    }
+    while (!(b*d-a*e));
+    
     x = -(c*e-b*f)/(b*d-a*e);
     y = (d*c-a*f)/(b*d-a*e);
 
