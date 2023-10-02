@@ -6,6 +6,8 @@ void main(){
     scanf("%d:%d",&horas,&minutos);
     if (horas>=12){
         horas -= 12;
+        printf("La hora en formato 12 h seria: %02d:%02d PM",horas,minutos);
+    } else{
+        printf("La hora en formato 12 h seria: %02d:%02d AM",horas,minutos);
     }
-    printf("La hora en formato 12 h seria: %d:%d",horas,minutos);
 }
