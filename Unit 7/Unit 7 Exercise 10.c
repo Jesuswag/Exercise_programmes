@@ -12,12 +12,26 @@ void imprimir(struct FECHA x){
 }
 
 void leer(struct FECHA *x){
-    printf("Introduce el dia:");
-    scanf("%d",&x->dia);
-    printf("Introduce el mes:");
-    scanf("%d",&x->mes);
-    printf("Introduce el anio:");
-    scanf("%d",&x->anio);
+    int correct;
+    do{
+        printf("Escribe la fecha (DD/MM/AAAA)");
+        scanf("%d/%d/%d",&x->dia,&x->mes,&x->anio);
+        if (x->mes < 1 || x->mes > 12){
+            printf("El mes no es valido\n");
+            correct = 0;
+        }else if (x->mes == 2 && (x->dia > 28 || x->dia < 1)){
+            printf("Febrero no tiene mas de 28 dias\n");
+            correct = 0;
+        }else if ((x->mes == 4 || x->mes == 6 || x->mes == 9 || x->mes == 11) && (x->dia > 30 || x->dia < 1)){
+            printf("Este mes no tiene mas de 30 dias\n");
+            correct = 0;
+        }else if ((x->mes == 1 || x->mes == 3 || x->mes == 5 || x->mes == 7 || x->mes == 8 || x->mes == 10 || x->mes == 12) && (x->dia > 31 || x->dia < 1)){
+            printf("Este mes no tiene mas de 31 dias\n");
+            correct = 0;
+        }else{
+            correct = 1;
+        }
+    } while (!correct);
 
 }
 
