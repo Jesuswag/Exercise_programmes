@@ -16,10 +16,12 @@ struct MESA {
 
 bool pasar(struct MESA mesa, struct JUGADOR jug){ // Comparo todos los dos numeros de cada ficha de un jugador con los extremos de la mesa
     for (int i = 0;i<jug.num_fichas;i++){
-        if (jug.ficha[i].puntos1 == mesa.extremo1 || jug.ficha[i].puntos1 == mesa.extremo2) return false;
-        else if (jug.ficha[i].puntos2 == mesa.extremo1 || jug.ficha[i].puntos2 == mesa.extremo2) return false;
-        else return true;
+        if (jug.ficha[i].puntos1 == mesa.extremo1||
+            jug.ficha[i].puntos1 == mesa.extremo2||
+            jug.ficha[i].puntos2 == mesa.extremo1||
+            jug.ficha[i].puntos2 == mesa.extremo2) return false;
     }
+    return true;
 }
 
 void main(){
