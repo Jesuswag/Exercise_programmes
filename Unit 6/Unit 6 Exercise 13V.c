@@ -1,51 +1,50 @@
 #include <stdio.h>
-int fusion(int v1[], int v2[], int v3[], int n1, int n2){
-    int i1,i2,i3;
-    i1 = i2 = i3 = 0;
-    while(i1<n1 && i2<n2){
-        if(v1[i1] < v2[i2]){
-            v3[i3] = v1[i1];
-            i1++;
-            i3++;
-        }else if (v1[i1]>v2[i2]){
-            v3[i3] = v2[i2];
-            i2++;
-            i3++;
-        }else{
-            v3[i3] = v1[i1];
-            i1++;
-            i2++;
-            i3++;
-        }
-    }
-    while(i1<n1){
-        v3[i3] = v1[i1];
-        i1++;
-        i3++;
-    }
-    while(i2<n2){
-        v3[i3] = v2[i2];
-        i2++;
-        i3++;
 
+void fusion (int n1, int v1[n1], int n2, int v2[n2], int v3[n1+n2]) {
+    int cont1, cont2, cont3;
+    cont1 = cont2 = cont3 = 0;
+    while (cont1<n1 && cont2<n2) { // Que se agote uno no depende de su longitud sino del tamanio de los numeros
+        if (v1[cont1] < v2[cont2]) {
+            v3[cont3] = v1[cont1];
+            cont3++;
+            cont1++;
+        } else if (v1[cont1] == v2[cont2]) {
+            v3[cont3] = v1[cont1];
+            cont3++;
+            cont2++;
+            cont1++;
+        } else if (v1[cont1] > v2[cont2]) {
+            v3[cont3] = v2[cont2];
+            cont3++;
+            cont2++;
+        }
+    } 
+    // Lo convertimos en caso d que se agote antes el segundo
+    if (cont1<n1) {
+        while (cont1 <n1) {
+            v3[cont3] = v1[cont1];
+            cont3++;
+            cont1++;
+        }
+    } else {
+        while (cont2 <n2) {
+            v3[cont3] = v2[cont2];
+            cont3++;
+            cont2++;
+        } 
+    }
+    while (cont3 <(n1+n2)) { //relleno con ceros
+        v3[cont3] = 0;
+        cont3++;
     }
 }
-int main() {
-    int n1,n2;
-    scanf("%d",&n1);
-    scanf("%d",&n2);
-    int a[n1],b[n2];
-    int res[n1 + n2];
 
-    for (int i = 0; i < n1; i++){
-        scanf("%d",&a[i]);
-    }
-    for (int i = 0; i < n2; i++){
-        scanf("%d",&b[i]);
-    }
-
-    fusion(a, b, res, n1, n2);
-    for (int i = 0; i < n1 + n2; i++){
-        printf("%d\n", res[i]);
+void main () {
+    int a[4] = {3,6,7,9};
+    int b[6] = {1,3,4,5,7,8};
+    int c[10];
+    fusion(4,a,6,b,c);
+    for (int i=0; i<10; i++) {
+        printf(" %d ",c[i]);
     }
 }

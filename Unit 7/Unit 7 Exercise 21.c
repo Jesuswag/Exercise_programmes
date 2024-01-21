@@ -1,52 +1,69 @@
 #include <stdio.h>
-// El enunciado no es muy claro que digamos. :/
-// Como no dice cuantas notas por cada curso el pt.3 lo hago a mi forma
+//El ejercicio no es muy claro.
 struct Alumno {
     char DNI[10];
-    char nombre[10];
-    char direccion[20];
-    float notas[3]; // Una para cada anio.
+    char nombre[15];
+    char direccion[30];
+    float notas[3]; // Imagino que una para cada año
 };
 
-void leer (int num_alumnos, struct Alumno lista[num_alumnos]);
-float media(int num_alumnos, struct Alumno lista[num_alumnos]);
+float media(struct Alumno lista, int num_alumno,anio);
+float leer(struct Alumno lista, int num_alumno);
 
-void main () {
-    int num_alumnos;
-    puts("Cuantos alumnos hay en el cole?");
-    scanf("%d",&num_alumnos);
-    fflush(stdin);
+void main(){
+    int num_alumno;
+    int exit = 0;
+    int anio;
+    int opcion;
+    do {
+        puts("Cuantos alumnos hay en la escuela?");
+        scanf("%d",&num_alumno);
+    } while (num_alumno <= 0);
 
-    struct Alumno lista[num_alumnos];
-    leer(num_alumnos,lista);
-    printf("%f",media(num_alumnos,lista));
+    struct Alumno Lista[num_alumno];
+
+    while (!exit){
+        puts("0:Introducir datos. \n1:Nota media \n2:Salir")
+        scanf("%d",&opcion);
+        switch (opcion){
+            case 0:
+                leer(lista,num_alumno);
+                break;
+            case 1;
+                puts("De que anio (1,2,3) quiere ver la media?");
+                scanf("%d",&anio);
+                printf("%f",media(lista,num_alumno,anio));
+                break;
+            case 2;
+                exit = 1;
+                break;
+            default;
+                puts("Opcion incorrecta");
+        }
+    }
 }
 
-void leer (int num_alumnos, struct Alumno lista[num_alumnos]){
-    for (int i=0; i<num_alumnos; i++) {
-        printf("Alumno numero %d:\n",i+1);
+float media(struct Alumno lista, int num_alumno, int anio){
+    float suma = 0;
+
+    for (int i=0; i<num_alumno;i++){
+        suma += lista[i].notas[anio-1];
+    }
+    return suma/num_alumno;
+}
+
+void leer(struct Alumno lista, int num_alumno){
+    for (int i=0;i<num_alumno;i++){
+        printf("\nAlumno nº %d:",i+1);
         printf("DNI: ");
-        gets(lista[i].DNI);
+        scanf("%s",lista[i].DNI);
         printf("Nombre: ");
         gets(lista[i].nombre);
         printf("Direccion: ");
         gets(lista[i].direccion);
-        for (int j=0; j<3; j++) {
+        for (j=0;j<3;j++){
             printf("Nota anio %d: ",j+1);
             scanf("%f",&lista[i].notas[j]);
         }
-        fflush(stdin);
     }
-}
-
-float media(int num_alumnos, struct Alumno lista[num_alumnos]){
-    float suma = 0;
-    int anio;
-    puts("En que anio quiere ver la media?");
-    scanf("%d",&anio);
-
-    for (int i=0; i<num_alumnos; i++) {
-        suma += lista[i].notas[anio-1];
-    }
-    return suma/num_alumnos;
 }
