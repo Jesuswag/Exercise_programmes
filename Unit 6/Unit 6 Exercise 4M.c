@@ -1,45 +1,41 @@
 #include <stdio.h>
-void colmin(int n, int m, int a[n][m], int c[n]){
-    int menor;
-    for (int i = 0;i<n;i++){
-        menor = a[i][0];
-        for (int j = 0;j<m;j++){
-            if (a[i][j]< menor){
-                menor = a[i][j];
-            }
-        }
-        c[i] = menor;
-    }
-}
 
-void leer(int n, int m, int x[n][m]){
-    for (int i = 0;i<n;i++){
-        for (int j = 0;j<m;j++){
-            printf("x[%d][%d]",i,j);
-            scanf("%d",&x[i][j]);
+void leer(int n, int m, float matrix[n][m]) { //old exercises did't have good taste in the order of parameters
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            printf("matrix[%d][%d]: ", i, j);
+            scanf("%f", &matrix[i][j]);
         }
     }
 }
 
-void escribir(int n, int x[n]){
-    printf("{ ");
-    for (int i = 0;i<n;i++){
-        printf("%d, ",x[i]);
+void imprimir(int m, float matrix[m]) {
+    printf(" {");
+    for (int j = 0; j < m; j++) {
+        printf("%f, ", matrix[j]);
     }
-    printf("}");
+    printf("} ");
 }
 
-void main() {
+void mincol (int n, int m, float matrix[n][m], float vector[n]) {
+    float min;
+    for (int i=0; i<m; i++) {
+        min = matrix[0][i];
+        for (int j=0; j<n; j++) {
+            if (matrix[j][i] < min) min = matrix[j][i];
+        }
+        vector[i] = min;
+    }
+}
+
+void main () {
     int n,m;
-    puts("Cuantas filas?");
-    scanf("%d",&n);
-    puts("Cuantas columnas?");
-    scanf("%d",&m);
+    puts("n,m");
+    scanf("%d,%d",&n,&m);
+    float matrix[n][m];
+    float vector[n];
 
-    int a[n][m],c[n];
-    puts("Introduce el primer vector");
-    leer(n,m,a);
-
-    colmin(n,m,a,c);
-    escribir(n,c);
+    leer(n,m,matrix);
+    mincol(n,m,matrix,vector);
+    imprimir(n,vector);
 }

@@ -1,43 +1,39 @@
 #include <stdio.h>
-void colsum(int n, int m, int a[n][m], int c[n]){
-    int suma;
-    for (int i = 0;i<n;i++){
-        suma = 0;
-        for (int j = 0;j<m;j++){
-            suma += a[i][j];
-        }
-        c[i] = suma;
-    }
-}
 
-void leer(int n, int m, int x[n][m]){
-    for (int i = 0;i<n;i++){
-        for (int j = 0;j<m;j++){
-            printf("x[%d][%d]",i,j);
-            scanf("%d",&x[i][j]);
+void leer (int n, int m, int matriz[n][m]) {
+    for (int i = 0; i < n; i++) {
+        for (int j = 0; j < m; j++) {
+            printf("matriz[%d][%d]: ", i, j);
+            scanf("%d", &matriz[i][j]);
         }
     }
 }
 
-void escribir(int n, int x[n]){
-    printf("{ ");
-    for (int i = 0;i<n;i++){
-        printf("%d, ",x[i]);
+void imprimir(int m, int vector[m]) {
+    printf(" {");
+    for (int j = 0; j < m; j++) {
+        printf("%d, ", vector[j]);
     }
-    printf("}");
+    printf("} ");
 }
 
-void main() {
+
+void colsum (int n, int m, int matrix[n][m], int vector[m]) {
+    for (int i=0; i<m; i++) {
+        vector[i] = 0;
+        for (int j=0; j<n; j++) {
+            vector[i] += matrix[j][i];
+        }
+    }
+}
+
+void main () {
     int n,m;
-    puts("Cuantas filas?");
-    scanf("%d",&n);
-    puts("Cuantas columnas?");
-    scanf("%d",&m);
-
-    int a[n][m],c[n];
-    puts("Introduce el primer vector");
-    leer(n,m,a);
-
-    colsum(n,m,a,c);
-    escribir(n,c);
+    puts("n,m");
+    scanf("%d,%d",&n,&m);
+    int matrix[n][m];
+    int vector[m];
+    leer(n,m,matrix);
+    colsum(n,m,matrix,vector);
+    imprimir(m,vector);
 }
