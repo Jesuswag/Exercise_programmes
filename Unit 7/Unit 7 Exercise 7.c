@@ -1,17 +1,18 @@
 #include <stdio.h>
 
-struct FECHA{
+
+typedef struct {
     int dia;
     int mes;
     int anio;
-};
+} Fecha;
 
-void imprimir(struct FECHA x){
+
+void imprimir (Fecha x) {
     printf("%02d/%02d/%04d",x.dia,x.mes,x.anio);
 }
 
-int main() {
-    struct FECHA ejemplo = {04,12,1967};
-    imprimir(ejemplo);
-    return 0;
+void main () {
+    Fecha hoy = {23,1,2024};
+    imprimir(hoy);
 }

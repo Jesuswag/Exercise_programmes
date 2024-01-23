@@ -1,48 +1,33 @@
 #include <stdio.h>
-#define GRADO 3
-struct Monomio{
-    float coef;
-    float exp;
+
+struct Polinomio {
+    float base;
+    float expo;
 };
 
-void leer(struct Monomio polinomio[]){
-    for (int i=0;i<GRADO;i++){
-        printf("Termino %d -> ",i);
-        scanf("%f",&polinomio[i].coef);
-        printf("Exponente %d -> ",i);
-        scanf("%f",&polinomio[i].exp);
+void leer (struct Polinomio *x) {
+    printf("Base ");
+    scanf("%f",&x->base); //o tambien &(*x).real
+    printf("Expo ");
+    scanf("%f",&(*x).expo);
+}
+
+void imprimir (int n, struct Polinomio x[n]) {
+    for (int i=0; i<n; i++) {
+        if (i<n-1) {
+            printf("%.2f^%.2f + ",x[i].base,x[i].expo);
+        } else printf("%f.2^%.2f",x[i].base,x[i].expo);
     }
 }
 
-void imprimir(struct Monomio polinomio[]){
-    for (int i = 0;i<GRADO;i++){
-        printf("%.2fx^%.2f",polinomio[i].coef,polinomio[i].exp);
-        if ((i+1) <GRADO) printf(" + ");
+void main () {
+    int n;
+    puts("Cuantos terminos desea?");
+    scanf("%d",&n);
+    struct Polinomio lista[n];
+    for (int i=0; i<n; i++) {
+        leer(&lista[i]);
     }
-    printf("\n");
-}
-
-int main() {
-    struct Monomio polinomio[GRADO];
-    int exe = 1;
-    int option;
-    while (exe){
-        puts("Seleccione opcion:\n1.Introducir polinomio\n2.Imprimir polinomio.\n3.Salir\n");
-        scanf("%d",&option);
-        switch(option){
-            case 3:
-                puts("Chao");
-                exe = 0;
-                break;
-            case 2:
-                imprimir(polinomio);
-                break;
-            case 1:
-                leer(polinomio);
-                break;
-
-        }
-    }
-
-    return 0;
+    imprimir(n,lista);
+    
 }

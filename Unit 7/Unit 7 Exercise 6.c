@@ -1,21 +1,20 @@
 #include <stdio.h>
 
-struct FECHA {
+
+typedef struct {
     int dia;
     int mes;
     int anio;
-};
+} Fecha;
 
-struct HORA{
-    int hora;
-    int min;
+struct Hora {
     int sec;
+    int min;
+    int hour;
 };
 
-void main() {
-    struct FECHA fevento1= {14, 03, 2005};
-    struct HORA herento1= {11,30,00};
 
-    struct FECHA fevento2 = {11,07,1996};
-    struct HORA herento2 = {01,00,00};
+void main () {
+    struct Hora x;
+    Fecha y;
 }

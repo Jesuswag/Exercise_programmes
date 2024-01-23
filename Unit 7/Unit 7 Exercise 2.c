@@ -1,44 +1,33 @@
 #include <stdio.h>
-struct Complejo{
+
+struct Complejo {
     float real;
     float imaginaria;
 };
 
-struct Complejo suma(struct Complejo numero1, struct Complejo numero2){
-    struct Complejo auxiliar;
-    auxiliar.real = numero1.real + numero2.real;
-    auxiliar.imaginaria = numero1.imaginaria + numero2.imaginaria;
-    return auxiliar;
+void leer (struct Complejo *x) {
+    printf("Parte imaginaria:");
+    scanf("%f",&x->imaginaria); //o tambien &(*x).real
+    printf("Parte real");
+    scanf("%f",&(*x).real);
 }
 
-void resta(struct Complejo numero1, struct Complejo numero2, struct Complejo *auxiliar){
-    auxiliar->real = numero1.real - numero2.real;
-    (*auxiliar).imaginaria = numero1.imaginaria - numero2.imaginaria;
+void suma (struct Complejo x, struct Complejo y) {
+    float s1 = x.real + y.real;
+    float s2 = x.imaginaria + y.imaginaria;
+    printf("\nSuma: %f + %f i",s1,s2);
 }
 
-int main() {
-    char eleccion;
-    struct Complejo numero1,numero2,auxiliar;
+void resta (struct Complejo x, struct Complejo y) {
+    float s1 = x.real - y.real;
+    float s2 = x.imaginaria - y.imaginaria;
+    printf("\nResta: %f + %f i",s1,s2);
+}
 
-    puts("Introduce el primer numero");
-    scanf("%f+%f",&numero1.real,&numero1.imaginaria);
-
-    puts("Introduce el segundo numero");
-    scanf("%f+%f",&numero2.real,&numero2.imaginaria);
-
-    puts("Quieres sumarlos o restarlos?");
-    fflush(stdin);
-    scanf("%c",&eleccion);
-
-    if (eleccion == '+'){
-        auxiliar = suma(numero1,numero2);
-        printf("El resultado de la suma es: %f+%fi",auxiliar.real,auxiliar.imaginaria);
-    }
-    else if (eleccion == '-'){
-        resta(numero1,numero2,&auxiliar);
-        printf("El resultado de la resta es: %f+%fi",auxiliar.real,auxiliar.imaginaria);
-    }
-    else puts("Vuelva a intentarlo");
-
-    return 0;
+void main () {
+    struct Complejo a,b;
+    leer(&a);
+    leer(&b);
+    suma(a,b);
+    resta(a,b);
 }

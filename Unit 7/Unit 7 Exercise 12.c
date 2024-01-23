@@ -2,10 +2,14 @@
 
 const char N_MESES[12][12] = {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"}; 
 
+typedef enum {correcto,error} Resultado;
+
 typedef struct {
     int dia;
     int mes;
     int anio;
+    Resultado validez;
+
 } Fecha;
 
 Fecha leer() {
@@ -16,14 +20,17 @@ Fecha leer() {
     scanf("%d",&x.mes);
     printf("Anio: ");
     scanf("%d",&x.anio);
+    if (x.anio>=1990 && x.anio <= 2020) {
+        x.validez = correcto;
+    }
     return x;
 }
 
-void imprimir (Fecha x) {
-    printf("%02d de %s de %04d",x.dia,N_MESES[x.mes-1],x.anio);
-}
+
 
 void main () {
     Fecha hoy = leer();
-    imprimir(hoy);
+    if (hoy.validez == correcto) {
+        printf("La fecha es correcta");
+    } else printf("Error");
 }
