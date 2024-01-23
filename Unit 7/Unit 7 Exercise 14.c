@@ -1,12 +1,8 @@
 #include <stdio.h>
 #include <string.h>
 
-#define DIA 30
-#define MES 12
-#define HORA 24
-#define MINUTO 60
-
-enum Tipo {ingreso,alta};
+const char MESES[12][11] = {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"};
+enum Estado {ingreso,alta};
 
 struct Fecha {
     int dia;
@@ -15,40 +11,37 @@ struct Fecha {
 };
 
 struct Tiempo {
-    int hora;
-    int minuto;
+    int min;
+    int hour;
 };
 
-struct Evento {
-    enum Tipo estado;
+typedef struct {
     int dni;
     char nombre[10];
-    struct Tiempo tiempo;
-    struct Fecha fecha;
-};
+    struct Tiempo t;
+    struct Fecha f;
+    enum Estado e;
+} Evento;
 
-void imprimir(struct Evento paciente);
-
-void main(){
-    struct Evento paciente_1;
-    paciente_1.dni = 34658181;
-    strcpy(paciente_1.nombre,"Jesus");
-    paciente_1.estado = alta;
-    paciente_1.fecha.anio = 2024;
-    paciente_1.fecha.mes = 1;
-    paciente_1.fecha.dia = 20;
-    paciente_1.tiempo.hora = 18;
-    paciente_1.tiempo.minuto = 34;
-
-    imprimir(paciente_1);
+void imprimir_evento(Evento paciente) {
+    if (paciente.e == alta){
+        puts("ALTA:");
+    } else {
+        puts("INGRESO:");
+    }
+    printf("Paciente\nDNI: %d\nNombre: %s\nFecha: %d de %s de %d a las %02d:%02d\n",paciente.dni,paciente.nombre,paciente.f.dia,MESES[paciente.f.mes],paciente.f.anio,paciente.t.hour,paciente.t.min);
 }
 
-void imprimir(struct Evento paciente) {
-    char meses[12][11] = {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"};
-    if (paciente.estado == alta){
-        puts("ALTA");
-    } else {
-        puts("INGRESO");
-    }
-    printf("DNI: %d\nNombre: %s\nFecha: %d de %s de %d a las %d:%d\n",paciente.dni,paciente.nombre,paciente.fecha.dia,meses[paciente.fecha.mes],paciente.fecha.anio,paciente.tiempo.hora,paciente.tiempo.minuto);
+void main(){
+    Evento paciente_1;
+    strcpy(paciente_1.nombre,"Jesus");
+    paciente_1.dni = 034;
+    paciente_1.f.dia = 3;
+    paciente_1.f.mes = 3;
+    paciente_1.f.anio = 3343;
+    paciente_1.t.hour = 23;
+    paciente_1.t.min = 34;
+    paciente_1.e = alta;
+
+    imprimir_evento(paciente_1);
 }

@@ -1,11 +1,8 @@
 #include <stdio.h>
+#include <string.h>
 
-#define DIA 30
-#define MES 12
-#define HORA 24
-#define MINUTO 60
-
-enum Tipo {ingreso,alta};
+const char MESES[12][11] = {"Enero","Febrero","Marzo","Abril","Mayo","Junio","Julio","Agosto","Septiembre","Octubre","Noviembre","Diciembre"};
+enum Estado {ingreso,alta};
 
 struct Fecha {
     int dia;
@@ -14,17 +11,18 @@ struct Fecha {
 };
 
 struct Tiempo {
-    int hora;
-    int minuto;
+    int min;
+    int hour;
 };
 
-struct Evento {
-    enum Tipo estado;
-    int dni[10];
+typedef struct {
+    int dni;
     char nombre[10];
-    struct Tiempo tiempo;
-    struct Fecha fecha;
-};
+    struct Tiempo t;
+    struct Fecha f;
+    enum Estado e;
+} Evento;
 
 void main(){
+    Evento paciente_1;
 }

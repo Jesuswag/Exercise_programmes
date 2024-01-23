@@ -1,12 +1,7 @@
 #include <stdio.h>
 #include <string.h>
 
-#define DIA 30
-#define MES 12
-#define HORA 24
-#define MINUTO 60
-
-enum Tipo {ingreso,alta};
+enum Estado {ingreso,alta};
 
 struct Fecha {
     int dia;
@@ -15,20 +10,25 @@ struct Fecha {
 };
 
 struct Tiempo {
-    int hora;
-    int minuto;
+    int min;
+    int hour;
 };
 
-struct Evento {
-    enum Tipo estado;
+typedef struct {
     int dni;
     char nombre[10];
-    struct Tiempo tiempo;
-    struct Fecha fecha;
-};
+    struct Tiempo t;
+    struct Fecha f;
+    enum Estado e;
+} Evento;
 
-struct Evento lista[500];
-int num_eventos;
+// VARIABLES GLOBALES
+Evento lista[500];
+int num_eventos = 0;
+
 
 void main(){
+
 }
+
+
